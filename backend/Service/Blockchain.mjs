@@ -38,8 +38,7 @@ export const purchaseGiftCard = async (email, amount) => {
     console.log('Transaction sent! Hash:', txResponse.hash);
 
     // waiting for the transaction to be confirmed
-    const receipt = await txResponse.wait();
-    console.log('Transaction confirmed! Receipt:', receipt);
+    return txResponse;
   } catch (error) {
     console.error('Error during transaction:', error);
   }
