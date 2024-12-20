@@ -19,16 +19,6 @@ const contract = new ethers.Contract(
   signer
 );
 
-export const getGiftCardPrice = async () => {
-  try {
-    const price = await contract.giftCardPrice();
-    console.log('Gift Card Price (in wei)', price.toString());
-    return price;
-  } catch (error) {
-    console.error('Gift card price couldnt be fetched', error);
-  }
-};
-
 export const purchaseGiftCard = async (email, amount) => {
   try {
     // Send the transaction
