@@ -20,11 +20,7 @@ export const addGiftCardPurschase = async (req, res) => {
       Amount,
     });
 
-    console.log('Saving to DB', purchase);
-
     const savedPurchase = await purchase.save();
-
-    console.log('Saved to DB', savedPurchase);
 
     res.status(201).json({
       message: 'Gift card purschase saved successfully!',
