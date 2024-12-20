@@ -22,25 +22,12 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "amount",
+        "name": "amountInEth",
         "type": "uint256"
       }
     ],
     "name": "GiftCardPurchased",
     "type": "event"
-  },
-  {
-    "inputs": [],
-    "name": "giftCardPrice",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
   },
   {
     "inputs": [],
@@ -66,19 +53,6 @@
     "name": "purchaseGiftCard",
     "outputs": [],
     "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_price",
-        "type": "uint256"
-      }
-    ],
-    "name": "setGiftCardPrice",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]
