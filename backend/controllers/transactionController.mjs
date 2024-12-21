@@ -1,6 +1,5 @@
 import { purchaseGiftCard } from '../Service/Blockchain.mjs';
 import GiftCardPurchase from '../model/giftCardModel.mjs';
-import { ethers } from 'ethers';
 import { sendEmail } from '../Service/emailService.mjs';
 
 export const buyGiftCard = async (req, res) => {

@@ -3,8 +3,15 @@ import dotenv from 'dotenv';
 import transactionRouter from './routes/transactionRoutes.mjs';
 import giftCardRouter from './routes/giftCardRoutes.mjs';
 import { connectDB } from './config/mongoDB.mjs';
-
+import cors from 'cors';
 const app = express();
+
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+  })
+);
 
 connectDB();
 
