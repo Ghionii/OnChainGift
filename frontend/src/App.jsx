@@ -1,11 +1,9 @@
-import { useState } from 'react';
-import { GiftCardForm } from './components/GiftCardPurchase';
-import './App.css';
-
+import { RouterProvider } from 'react-router-dom';
+import { Router } from '../Router';
 function App() {
   return (
     <>
-      <GiftCardForm />
+      <RouterProvider router={Router} />
     </>
   );
 }
