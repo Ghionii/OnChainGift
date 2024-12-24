@@ -8,14 +8,14 @@ export const giftCardPurchase = async (email, ethAmount, brand) => {
       throw new Error('Invalid amount, please enter a positive number');
     }
 
-    // Convert ETH amount to Wei (smallest unit of ETH)
     const amountInWei = ethers.parseEther(ethAmount.toString());
 
     const response = await axios.post(
       'http://localhost:8000/api/giftcard/buy',
       {
         email,
-        amount: amountInWei.toString(), // Sending amount in Wei
+        amount: amountInWei.toString(),
+        brand,
       }
     );
 

@@ -4,6 +4,8 @@ const giftCardSchema = new mongoose.Schema({
   BuyerAddress: { type: String, required: true },
   RecipientEmail: { type: String, required: true },
   TransactionHash: { type: String, required: true, unique: true },
+  Brand: { type: String, required: true },
+  code: { type: String, required: true, unique: true },
   Timestamp: { type: Date, default: Date.now },
   Amount: { type: String, required: true },
 });
