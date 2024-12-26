@@ -8,16 +8,15 @@ export const Layout = () => {
         <header className='header'>
           <nav className='nav-right'>
             <ul className='nav-left'>
-              <li>
-                <NavLink to={'/'}>Home</NavLink>
-              </li>
-
               <h1 className='nav-h1'>
                 <NavLink to={'/'}> OnChainGift</NavLink>
               </h1>
               <>
                 <li>
                   <NavLink to={'/giftcards'}>Gift Cards</NavLink>
+                </li>
+                <li>
+                  <NavLink to={'/privacy'}>Privacy Policy</NavLink>
                 </li>
               </>
             </ul>

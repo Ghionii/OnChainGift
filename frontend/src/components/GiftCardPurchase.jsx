@@ -80,6 +80,14 @@ export const GiftCardForm = () => {
           <p>Converted Amount: {ethAmount.toFixed(6)} ETH</p>
         </div>
         <button type='submit'>Buy Gift Card</button>
+
+        <div>
+          <input type='checkbox' required />
+          <label>
+            I agree to the terms of our privacy policy.{' '}
+            <a href='/privacy'>Privacy Policy</a>
+          </label>
+        </div>
       </form>
 
       {message && <p>{message}</p>}
