@@ -1,4 +1,3 @@
-// filepath: /c:/Users/wille/OneDrive/Skrivbord/ExamensArbete/OnChainGift/frontend/src/components/GiftCardPurchase.jsx
 import React, { useEffect, useState } from 'react';
 import { giftCardPurchase, fetchEthPrice } from '../blockchainService';
 import { useLocation } from 'react-router-dom';

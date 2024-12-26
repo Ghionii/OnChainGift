@@ -1,4 +1,4 @@
-// filepath: backend/controllers/contractController.js
+// Initiate contract details fetching from blockchain service
 import { getContractDetails } from '../Service/Blockchain.mjs';
 
 export const fetchContractDetails = (req, res) => {
