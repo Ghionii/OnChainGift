@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import transactionRouter from './routes/transactionRoutes.mjs';
 import giftCardRouter from './routes/giftCardRoutes.mjs';
 import { connectDB } from './config/mongoDB.mjs';
+import contractRouter from './routes/contractRoutes.mjs';
 import cors from 'cors';
 const app = express();
 
@@ -18,6 +19,7 @@ connectDB();
 app.use(express.json());
 app.use('/api/giftcard', transactionRouter);
 app.use('/api/giftcard', giftCardRouter);
+app.use('/api/contract', contractRouter);
 
 const PORT = process.env.PORT || 8000;
 

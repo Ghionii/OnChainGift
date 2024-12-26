@@ -1,6 +1,6 @@
-import { react, useEffect, useState } from 'react';
-import { giftCardPurchase } from '../blockchainService';
-import { fetchEthPrice } from '../blockchainService';
+// filepath: /c:/Users/wille/OneDrive/Skrivbord/ExamensArbete/OnChainGift/frontend/src/components/GiftCardPurchase.jsx
+import React, { useEffect, useState } from 'react';
+import { giftCardPurchase, fetchEthPrice } from '../blockchainService';
 import { useLocation } from 'react-router-dom';
 
 export const GiftCardForm = () => {
@@ -83,7 +83,6 @@ export const GiftCardForm = () => {
         <button type='submit'>Buy Gift Card</button>
       </form>
 
-      {/* Displaying message after submitting the form */}
       {message && <p>{message}</p>}
     </div>
   );

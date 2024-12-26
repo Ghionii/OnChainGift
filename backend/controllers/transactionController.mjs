@@ -1,72 +1,75 @@
-import { purchaseGiftCard } from '../Service/Blockchain.mjs';
 import GiftCardPurchase from '../model/giftCardModel.mjs';
 import { sendEmail } from '../Service/emailService.mjs';
 import { ethers } from 'ethers';
 import { v4 as uuidv4 } from 'uuid';
+import { provider } from '../Service/Blockchain.mjs';
 
 export const buyGiftCard = async (req, res) => {
   try {
-    const { email, amount, brand } = req.body;
+    const { email, amount, brand, transactionHash } = req.body;
 
     console.log('Email:', email, 'Amount:', amount);
 
-    if (!email || !amount || !brand || typeof email !== 'string') {
+    if (
+      !email ||
+      !amount ||
+      !brand ||
+      !transactionHash ||
+      typeof email !== 'string'
+    ) {
       return res
         .status(400)
-        .json({ error: 'Invalid input, Email and amount are required' });
+        .json({ error: 'Invalid input, all fields are required' });
     }
 
     const supportedBrands = ['H&M', 'Amazon', 'Apple'];
-
     if (!supportedBrands.includes(brand)) {
       return res.status(400).json({ error: 'Invalid Brand selected' });
     }
+
+    // Get the transaction receipt
+    const receipt = await provider.getTransactionReceipt(transactionHash);
+    if (!receipt) {
+      return res.status(400).json({ error: 'Transaction not found' });
+    }
+
+    const buyerAddress = receipt.from;
 
     const amountInETH = ethers.formatEther(amount);
     const formattedAmount = parseFloat(amountInETH).toFixed(4);
 
     const giftCardCode = uuidv4();
 
-    // Call the purchaseGiftCard function
-    const txResponse = await purchaseGiftCard(email, amount);
-
-    // Wait for the transaction to be confirmed
-    const txReceipt = await txResponse.wait();
-
     // Save the transaction details in MongoDB
-    const dbTransaction = new GiftCardPurchase({
-      TransactionHash: txResponse.hash,
-      BuyerAddress: txResponse.from,
-      Brand: brand,
-      code: giftCardCode,
+    const giftCard = new GiftCardPurchase({
       RecipientEmail: email,
-      Amount: amount.toString(),
-      Timestamp: new Date(),
+      BuyerAddress: buyerAddress,
+      Amount: amount,
+      Brand: brand,
+      GiftCardCode: giftCardCode,
+      TransactionHash: transactionHash,
     });
 
-    // Save to the database
-    await dbTransaction.save();
+    await giftCard.save();
 
     const subject = 'Your Gift Card Purchase Confirmation';
-    const text = `Thank you for your purchase, Your gift card from ${brand} with ${formattedAmount} ETH is confirmed`;
-    const html = `<h1>Gift card Purchase Confirmation</h1>
+    const text = `Thank you for your purchase. Your gift card from ${brand} with ${formattedAmount} ETH is confirmed.`;
+    const html = `<h1>Gift Card Purchase Confirmation</h1>
                   <p>Thank you for your purchase</p>
-                  <p><strong>Brand: </strong>${brand}</p>
-                  <p><strong>Amount: </strong>${formattedAmount} ETH
-                  <p><strong>Transaction Hash: </strong> ${txResponse.hash}</p>
-                  <p><strong>Gift Card Code:: </strong> ${giftCardCode}</p>`;
+                  <p><strong>Brand:</strong> ${brand}</p>
+                  <p><strong>Amount:</strong> ${formattedAmount} ETH</p>
+                  <p><strong>Gift Card Code:</strong> ${giftCardCode}</p>`;
 
     await sendEmail(email, subject, text, html);
 
-    // Send success response with the receipt
-    res.status(200).json({
-      message: `Successfully purchased ${brand} gift card!`,
-      receipt: txReceipt,
+    res.status(201).json({
+      message: 'Gift card purchased successfully',
+      giftCardCode,
+      transactionHash,
     });
   } catch (error) {
     console.error('Error buying Gift Card:', error);
 
-    // Send error response
     res
       .status(500)
       .json({ error: 'Transaction Failed', details: error.message });
