@@ -1,0 +1,61 @@
+/* General container styling */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f9fa; /* Light gray background for a clean look */
+  padding: 2rem;
+}
+
+/* Landing page content styling */
+.landing-page {
+  max-width: 800px;
+  text-align: center;
+  background-color: #ffffff; /* White background for the content box */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 2rem;
+  color: #333; /* Dark text color for readability */
+  font-family: 'Arial', sans-serif;
+}
+
+/* Headings styling */
+.landing-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #2c3e50; /* Darker blue-gray for the main heading */
+}
+
+.landing-page h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #16a085; /* Teal color for the subheading */
+}
+
+/* Paragraph and list styling */
+.landing-page p {
+  margin: 1.5rem 0;
+  line-height: 1.6;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* List styling */
+.landing-page ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+  text-align: left; /* Align list items to the left for readability */
+}
+
+.landing-page ul li {
+  margin: 0.5rem 0;
+}
+
+/* Add hover effect for headings (optional) */
+.landing-page h1:hover,
+.landing-page h2:hover {
+  color: #1abc9c; /* Slightly brighter teal on hover */
+  transition: color 0.3s ease;
+}

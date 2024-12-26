@@ -6,18 +6,19 @@ dotenv.config();
 
 const ALCHEMY_API_KEY = process.env.ALCHEMY_API_KEY;
 const SEPOLIA_CONTRACT_ADDRESS = process.env.SEPOLIA_CONTRACT_ADDRESS;
-const privatekey = process.env.SEPOLIA_PRIVATE_KEY;
 const provider = new ethers.JsonRpcProvider(
   `https://eth-sepolia.g.alchemy.com/v2/${ALCHEMY_API_KEY}`
 );
-const signer = new ethers.Wallet(privatekey, provider);
 
 // Initialize the contract with the signer
-const contract = new ethers.Contract(
-  SEPOLIA_CONTRACT_ADDRESS,
-  contractABI,
-  signer
-);
+const contract = new ethers.Contract(SEPOLIA_CONTRACT_ADDRESS, contractABI);
+
+export const getContractDetails = () => {
+  return {
+    abi: contractABI,
+    address: SEPOLIA_CONTRACT_ADDRESS,
+  };
+};
 
 export const purchaseGiftCard = async (email, amount) => {
   try {
@@ -33,4 +34,5 @@ export const purchaseGiftCard = async (email, amount) => {
     console.error('Error during transaction:', error);
   }
 };
-export { provider, SEPOLIA_CONTRACT_ADDRESS, privatekey, signer };
+
+export { provider, SEPOLIA_CONTRACT_ADDRESS };

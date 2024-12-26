@@ -1,0 +1,25 @@
+.giftCardContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.giftCard {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 10px;
+  max-width: 200px;
+}
+
+.gift-card:hover {
+  transform: scale(1.05);
+}
+
+.gift-card img {
+  width: 330px;
+  height: 213px;
+}
